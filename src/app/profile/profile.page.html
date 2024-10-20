@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center ion-padding">
+      <ion-col size="12" class="ion-text-center">
+        <ion-avatar>
+          <img src="assets/profile-placeholder.png" alt="Profile Picture" />
+        </ion-avatar>
+        <ion-button expand="full" (click)="changeProfilePicture()">
+          Change Profile Picture
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input [(ngModel)]="user.name" placeholder="Enter your name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input [(ngModel)]="user.email" placeholder="Enter your email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Phone</ion-label>
+      <ion-input [(ngModel)]="user.phone" placeholder="Enter your phone number"></ion-input>
+    </ion-item>
+
+    <ion-row class="ion-padding">
+      <ion-col>
+        <ion-button expand="full" (click)="saveProfile()">Save</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

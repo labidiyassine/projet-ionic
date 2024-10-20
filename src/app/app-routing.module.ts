@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
+
 const routes: Routes = [
+ 
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
     path: '',
@@ -13,12 +15,32 @@ const routes: Routes = [
   },
   {
     path: 'register',
-    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () => import('./register/register.module').then(m => m.RegisterPageModule)
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
+  
+
+  {
+    path: 'hotel',
+    loadChildren: () => import('./hotel/hotel.module').then( m => m.HotelPageModule)
+  },
+  {
+    path: 'flight',
+    loadChildren: () => import('./flight/flight.module').then( m => m.FlightPageModule)
+  },
+  {
+    path: 'circuit',
+    loadChildren: () => import('./circuit/circuit.module').then( m => m.CircuitPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  
+  
 ];
 
 @NgModule({
