@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Circuit Form</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="circuitForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input formControlName="name"></ion-input>
+    </ion-item>
+    <ion-note slot="end" color="danger" *ngIf="circuitForm.get('name')?.invalid && circuitForm.get('name')?.touched">
+      <small *ngIf="circuitForm.get('name')?.errors?.['required']">Name is required.</small>
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Description</ion-label>
+      <ion-textarea formControlName="description"></ion-textarea>
+    </ion-item>
+    <ion-note slot="end" color="danger" *ngIf="circuitForm.get('description')?.invalid && circuitForm.get('description')?.touched">
+      <small *ngIf="circuitForm.get('description')?.errors?.['required']">Description is required.</small>
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Location</ion-label>
+      <ion-input formControlName="location"></ion-input>
+    </ion-item>
+    <ion-note slot="end" color="danger" *ngIf="circuitForm.get('location')?.invalid && circuitForm.get('location')?.touched">
+      <small *ngIf="circuitForm.get('location')?.errors?.['required']">Location is required.</ small>
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Length</ion-label>
+      <ion-input formControlName="length" type="number"></ion-input>
+    </ion-item>
+    <ion-note slot="end" color="danger" *ngIf="circuitForm.get('length')?.invalid && circuitForm.get('length')?.touched">
+      <small *ngIf="circuitForm.get('length')?.errors?.['required']">Length is required.</small>
+      <small *ngIf="circuitForm.get('length')?.errors?.['min']">Length must be a positive number.</small>
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Type</ion-label>
+      <ion-input formControlName="type"></ion-input>
+    </ion-item>
+    <ion-note slot="end" color="danger" *ngIf="circuitForm.get('type')?.invalid && circuitForm.get('type')?.touched">
+      <small *ngIf="circuitForm.get('type')?.errors?.['required']">Type is required.</small>
+    </ion-note>
+
+    <ion-button expand="full" type="submit" [disabled]="circuitForm.invalid">Submit</ion-button>
+  </form>
+</ion-content>
