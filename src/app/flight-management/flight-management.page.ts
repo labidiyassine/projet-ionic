@@ -20,8 +20,7 @@ export class FlightManagementPage implements OnInit {
     this.flightService.getAllFlights().subscribe(
       (data: any) => {
         console.log('Fetched Flights:', data);
-        // Check if 'documents' exists in the response
-        this.flights = data.documents || []; // Default to empty array if undefined
+        this.flights = data.documents || []; 
         console.log('Flights:', this.flights);
       },
       error => {
@@ -45,7 +44,7 @@ export class FlightManagementPage implements OnInit {
       this.flightService.deleteFlight(flightId).subscribe(
         () => {
           console.log(`Flight with ID ${flightId} deleted successfully.`);
-          this.loadFlights(); // Refresh the list after deletion
+          this.loadFlights(); 
         },
         error => {
           console.error('Error deleting flight:', error);

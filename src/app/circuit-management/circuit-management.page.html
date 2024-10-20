@@ -10,9 +10,9 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let circuit of circuits">
-      {{ circuit.fields.name.stringValue }}
+      {{ circuit.fields.name.stringValue }} <!-- Accessing name -->
       <ion-note slot="end">
-        {{ circuit.fields.description.stringValue }}
+        {{ circuit.fields.description.stringValue }} <!-- Accessing description -->
       </ion-note>
       <ion-buttons slot="end">
         <ion-button (click)="editCircuit(circuit)">Edit</ion-button>

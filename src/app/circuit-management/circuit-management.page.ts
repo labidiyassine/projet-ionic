@@ -19,7 +19,9 @@ export class CircuitManagementPage implements OnInit {
   loadCircuits() {
     this.circuitService.getAllCircuits().subscribe(
       (data: any) => {
+        console.log('Fetched Circuits:', data); 
         this.circuits = data.documents || [];
+        console.log('Circuits:', this.circuits); 
       },
       error => {
         console.error('Error fetching circuits:', error);

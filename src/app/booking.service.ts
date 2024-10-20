@@ -24,9 +24,12 @@ export class BookingService {
         name: { stringValue: hotelData.name },
         location: { stringValue: hotelData.location },
         price: { doubleValue: hotelData.price },
-        description: { stringValue: hotelData.description }
+        description: { stringValue: hotelData.description },
+        reserver: { doubleValue: 0}
       }
+
     };
+    
     return this.http.post(this.apiUrl, formattedData);
   }
 

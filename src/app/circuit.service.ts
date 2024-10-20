@@ -14,6 +14,7 @@ export class CircuitService {
   getAllCircuits(): Observable<any> {
     return this.http.get(`${this.apiUrl}`);
   }
+  
 
   // Fetch a circuit by ID
   getCircuitById(id: string): Observable<any> {

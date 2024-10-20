@@ -24,10 +24,12 @@ export class FlightService {
   createFlight(flightData: any): Observable<any> {
     const formattedData = {
       fields: {
-        flightNumber: { stringValue: flightData.flightNumber },
-        departure: { stringValue: flightData.departure },
-        arrival: { stringValue: flightData.arrival },
-        price: { doubleValue: flightData.price },
+        flightNumber: { stringValue: flightData.flightNumber || '' },
+        departure: { stringValue: flightData.departure || '' },
+        arrival: { stringValue: flightData.arrival || '' },
+        price: { doubleValue: flightData.price || 0 },
+        imageUrl: { stringValue: flightData.imageUrl || '' }, // Add image URL here
+        description: { stringValue: flightData.description || '' } // Assuming description is required
       },
     };
     return this.http.post(this.apiUrl, formattedData);

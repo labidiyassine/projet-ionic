@@ -11,6 +11,8 @@ import { FlightService } from '../flight.service';
 export class FlightFormPage implements OnInit {
   flightForm: FormGroup;
   flightId: string | null = null;
+  selectedImage: File | null = null;
+  imageError: string | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -53,10 +55,34 @@ export class FlightFormPage implements OnInit {
     );
   }
 
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+      if (!allowedTypes.includes(file.type)) {
+        this.imageError = 'Only images are allowed (JPEG, PNG, GIF).';
+        this.selectedImage = null;
+      } else {
+        this.imageError = null;
+        this.selectedImage = file;
+      }
+    }
+  }
+
   onSubmit() {
     if (this.flightForm.valid) {
+      const formData = new FormData();
+      for (const key in this.flightForm.controls) {
+        if (this.flightForm.controls.hasOwnProperty(key)) {
+          formData.append(key, this.flightForm.controls[key].value);
+        }
+      }
+      if (this.selectedImage) {
+        formData.append('image', this.selectedImage, this.selectedImage.name);
+      }
+
       if (this.flightId) {
-        this.flightService.updateFlight(this.flightId, this.flightForm.value).subscribe(
+        this.flightService.updateFlight(this.flightId, formData).subscribe(
           () => {
             this.router.navigate(['/flight-management']);
           },
@@ -65,7 +91,7 @@ export class FlightFormPage implements OnInit {
           }
         );
       } else {
-        this.flightService.createFlight(this.flightForm.value).subscribe(
+        this.flightService.createFlight(formData).subscribe(
           () => {
             this.router.navigate(['/flight-management']);
           },

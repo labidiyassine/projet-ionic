@@ -31,13 +31,23 @@
     </ion-note>
 
     <ion-item>
-      <ion-label position="floating"> Price</ion-label>
+      <ion-label position="floating">Price</ion-label>
       <ion-input id="price" formControlName="price" type="number"></ion-input>
     </ion-item>
     <ion-note slot="end" color="danger" *ngIf="flightForm.get('price')?.invalid && flightForm.get('price')?.touched">
       <small *ngIf="flightForm.get('price')?.errors?.['required']">Price is required.</small>
       <small *ngIf="flightForm.get('price')?.errors?.['min']">Price must be a positive number.</small>
     </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Image</ion-label>
+      <br>
+      <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+    </ion-item>
+    <ion-note slot="end" color="danger" *ngIf="imageError">
+      <small>{{ imageError }}</small>
+    </ion-note>
+    
 
     <ion-button expand="full" type="submit" [disabled]="flightForm.invalid">{{ flightId ? 'Update' : 'Create' }} Flight</ion-button>
   </form>

@@ -20,8 +20,8 @@ export class HotelManagementPage implements OnInit {
     this.bookingService.getAllHotels().subscribe(
       (data: any) => {
         console.log('Fetched Hotels:', data);
-        this.hotels = data.documents; // Adjust based on your response structure
-        console.log('Hotels:', this.hotels); // Log the hotels for verification
+        this.hotels = data.documents; 
+        console.log('Hotels:', this.hotels); 
       },
       error => {
         console.error('Error fetching hotels:', error);
@@ -30,7 +30,7 @@ export class HotelManagementPage implements OnInit {
   }
 
   editHotel(hotel: any) {
-    const hotelId = hotel.name.split('/').pop(); // Extract the document ID from the name
+    const hotelId = hotel.name.split('/').pop();
     if (hotelId) {
       this.router.navigate(['/hotel-form', hotelId]);
     } else {
@@ -39,12 +39,12 @@ export class HotelManagementPage implements OnInit {
   }
 
   deleteHotel(hotel: any) {
-    const hotelId = hotel.name.split('/').pop(); // Extract the document ID from the name
+    const hotelId = hotel.name.split('/').pop(); 
     if (hotelId) {
       this.bookingService.deleteHotel(hotelId).subscribe(
         () => {
           console.log(`Hotel with ID ${hotelId} deleted successfully.`);
-          this.loadHotels(); // Refresh the list after deletion
+          this.loadHotels(); 
         },
         error => {
           console.error('Error deleting hotel:', error);
