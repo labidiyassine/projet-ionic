@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,49 +8,48 @@ import { Observable } from 'rxjs';
 export class DataService {
   private apiUrl = 'https://firestore.googleapis.com/v1/projects/ionicproj-6fb8c/databases/(default)/documents'; 
 
+  constructor(private http: HttpClient) { }
 
-  constructor(private http : HttpClient) { }
-
-
-  // List of Hotels CRUD
-
-  // getHotels(): Observable<any> {
-  //   return this.http.get<any>(`${this.apiUrl}/hotels`);
-  // }
   getHotels(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/Hotel`); 
-  }
-  getHotel(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
+    return this.http.get(`${this.apiUrl}/Hotel`);
   }
 
-  reserveHotel(hotelId: number): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/Hotel/${hotelId}/reserve`);
+  getHotel(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/Hotel/${id}`);
   }
- 
-  // List of FLIGHT CRUD
 
+  reserveHotel(hotelId: string): Observable<any> {
+    const url = `${this.apiUrl}/${hotelId}.json`; 
+    return this.http.patch(url, {
+      fields: {
+        reserver: { integerValue: 1 }
+      }
+    });
+  }
+
+  getHotelById(id: string): Observable<any> {
+    const url = `${this.apiUrl}/${id}`; // Replace this with the correct API endpoint
+    return this.http.get<any>(url).pipe(
+      map((response: any) => ({
+        id: response.name.split('/').slice(-1)[0],
+        name: response.fields.name.stringValue,
+        description: response.fields.description?.stringValue,
+        price: parseInt(response.fields.price?.integerValue, 10),
+        location: response.fields.location?.stringValue
+      }))
+    );
+  }
+  
 
   getFlights(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/Flight`);
   }
 
-  getFlight(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
-  }
-
-
-
-
-    // List of Circuit CRUD
-
   getCircuits(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/Circuit`);
   }
 
-  getCircuit(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  getCircuitById(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/Circuit/${id}`);
   }
-
- 
 }

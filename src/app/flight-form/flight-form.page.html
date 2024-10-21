@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ flightId ? 'Edit Flight' : 'Create Flight' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="flightForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Flight Number</ion-label>
+      <ion-input id="flightNumber" formControlName="flightNumber"></ion-input>
+    </ion-item>
+    <ion-note slot="end" color="danger" *ngIf="flightForm.get('flightNumber')?.invalid && flightForm.get('flightNumber')?.touched">
+      <small *ngIf="flightForm.get('flightNumber')?.errors?.['required']">Flight Number is required.</small>
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Departure</ion-label>
+      <ion-input id="departure" formControlName="departure"></ion-input>
+    </ion-item>
+    <ion-note slot="end" color="danger" *ngIf="flightForm.get('departure')?.invalid && flightForm.get('departure')?.touched">
+      <small *ngIf="flightForm.get('departure')?.errors?.['required']">Departure is required.</small>
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Arrival</ion-label>
+      <ion-input id="arrival" formControlName="arrival"></ion-input>
+    </ion-item>
+    <ion-note slot="end" color="danger" *ngIf="flightForm.get('arrival')?.invalid && flightForm.get('arrival')?.touched">
+      <small *ngIf="flightForm.get('arrival')?.errors?.['required']">Arrival is required.</small>
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Price</ion-label>
+      <ion-input id="price" formControlName="price" type="number"></ion-input>
+    </ion-item>
+    <ion-note slot="end" color="danger" *ngIf="flightForm.get('price')?.invalid && flightForm.get('price')?.touched">
+      <small *ngIf="flightForm.get('price')?.errors?.['required']">Price is required.</small>
+      <small *ngIf="flightForm.get('price')?.errors?.['min']">Price must be a positive number.</small>
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Image</ion-label>
+      <br>
+      <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+    </ion-item>
+    <ion-note slot="end" color="danger" *ngIf="imageError">
+      <small>{{ imageError }}</small>
+    </ion-note>
+    
+
+    <ion-button expand="full" type="submit" [disabled]="flightForm.invalid">{{ flightId ? 'Update' : 'Create' }} Flight</ion-button>
+  </form>
+</ion-content>

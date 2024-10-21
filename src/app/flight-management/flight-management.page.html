@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Flight Management</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/flight-form">Create Flight</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let flight of flights">
+      <ion-label>
+        <h2>{{ flight.fields?.flightNumber?.stringValue || 'No Flight Number' }}</h2>
+        <p>{{ flight.fields?.departure?.stringValue || 'No Departure' }}</p>
+        <p>{{ flight.fields?.arrival?.stringValue || 'No Arrival' }}</p>
+        <p>{{ flight.fields?.price?.doubleValue | currency }}</p>
+        <p>{{ flight.fields?.description?.stringValue || 'No Description' }}</p>
+      </ion-label>
+      <ion-button (click)="editFlight(flight)">Edit</ion-button>
+      <ion-button color="danger" (click)="deleteFlight(flight)">Delete</ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

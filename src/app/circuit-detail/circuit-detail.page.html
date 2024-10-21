@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/circuits"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ circuit?.fields?.name?.stringValue || 'Circuit Details' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-spinner *ngIf="loading"></ion-spinner>
+  <div *ngIf="!loading && circuit">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{ circuit.fields?.name?.stringValue }}</ion-card-title>
+        <ion-card-subtitle>{{ circuit.fields?.location?.stringValue }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>Price:</strong> {{ circuit.fields?.price?.doubleValue | currency }}</p>
+        <p><strong>Description:</strong> {{ circuit.fields?.description?.stringValue }}</p>
+        <p><strong>Length:</strong> {{ circuit.fields?.length?.stringValue }}</p>
+        <p><strong>Type:</strong> {{ circuit.fields?.type?.doubleValue }}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

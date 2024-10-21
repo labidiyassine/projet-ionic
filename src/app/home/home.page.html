@@ -14,30 +14,87 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
- 
-
-  
-
   <ion-grid>
     <ion-row>
       <ion-col size="4">
-        <ion-button expand="full" color="light" >
+        <ion-button (click)="navigateToHotels()" expand="full" color="light">
           <ion-icon name="bed" slot="start"></ion-icon>
           Hotels
         </ion-button>
       </ion-col>
       <ion-col size="4">
-        <ion-button expand="full" color="light" >
+        <ion-button (click)="navigateToFlights()" expand="full" color="light">
           <ion-icon name="airplane" slot="start"></ion-icon>
           Flights
         </ion-button>
       </ion-col>
       <ion-col size="4">
-        <ion-button expand="full" color="light">
+        <ion-button (click)="navigateToCircuits()" expand="full" color="light">
           <ion-icon name="navigate" slot="start"></ion-icon>
           Circuits
         </ion-button>
       </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Popular Hotels Section -->
+  <h2>Popular Hotels</h2>
+  <ion-grid>
+    <ion-row>
+      <ng-container *ngFor="let hotel of popularHotels">
+        <ion-col size="6">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>{{ hotel.name }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <img [src]="hotel.imageUrl" alt="Hotel Image" />
+              <p>{{ hotel.description }}</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ng-container>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Popular Circuits Section -->
+  <h2>Popular Circuits</h2>
+  <ion-grid>
+    <ion-row>
+      <ng-container *ngFor="let circuit of popularCircuits">
+        <ion-col size="6">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>{{ circuit.name }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <img [src]="circuit.imageUrl" alt="Circuit Image" />
+              <p>{{ circuit.description }}</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ng-container>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Popular Flights Section -->
+  <h2>Popular Flights</h2>
+  <ion-grid>
+    <ion-row>
+      <ng-container *ngFor="let flight of popularFlights">
+        <ion-col size="6">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>{{ flight.flightNumber }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p>Departure: {{ flight.departure }}</p>
+              <p>Arrival: {{ flight.arrival }}</p>
+              <p>Price: {{ flight.price | currency }}</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ng-container>
     </ion-row>
   </ion-grid>
 </ion-content>

@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ hotelId ? 'Edit Hotel' : 'Create Hotel' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="hotelForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Hotel Name</ion-label>
+      <ion-input id="name" formControlName="name"></ion-input>
+    </ion-item>
+    <ion-note slot="end" color="danger" *ngIf="hotelForm.get('name')?.invalid && hotelForm.get('name')?.touched">
+      <small *ngIf="hotelForm.get('name')?.errors?.['required']">Name is required.</small>
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Location</ion-label>
+      <ion-input id="location" formControlName="location"></ion-input>
+    </ion-item>
+    <ion-note slot="end" color="danger" *ngIf="hotelForm.get('location')?.invalid && hotelForm.get('location')?.touched">
+      <small *ngIf="hotelForm.get('location')?.errors?.['required']">Location is required.</small>
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Price</ion-label>
+      <ion-input id="price" formControlName="price" type="number"></ion-input>
+    </ion-item>
+    <ion-note slot="end" color="danger" *ngIf="hotelForm.get('price')?.invalid && hotelForm.get('price')?.touched">
+      <small *ngIf="hotelForm.get('price')?.errors?.['required']">Price is required.</small>
+      <small *ngIf="hotelForm.get('price')?.errors?.['min']">Price must be a positive number.</small>
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Description</ion-label>
+      <ion-textarea id="description" formControlName="description"></ion-textarea>
+    </ion-item>
+
+    <ion-button expand="full" type="submit" [disabled]="hotelForm.invalid">{{ hotelId ? 'Update' : 'Create' }} Hotel</ion-button>
+  </form>
+</ion-content>
