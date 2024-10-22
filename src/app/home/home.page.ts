@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BookingService } from '../booking.service';
 import { CircuitService } from '../circuit.service';
 import { FlightService } from '../flight.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,7 @@ export class HomePage implements OnInit {
   popularFlights: any[] = [];
 
   constructor(
+    private router: Router,
     private bookingService: BookingService,
     private circuitService: CircuitService,
     private flightService: FlightService
@@ -25,6 +27,16 @@ export class HomePage implements OnInit {
     this.loadFlights();
   }
 
+  goToHotels() {
+    this.router.navigate(['/hotel']);
+  }
+  goToFlights(){
+    this.router.navigate(['/flight']);
+
+  }
+  goToCircuits(){
+    this.router.navigate(['/circuit']);
+  }
   loadHotels() {
     this.bookingService.getAllHotels().subscribe({
       next: (data: any) => {

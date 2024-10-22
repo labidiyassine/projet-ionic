@@ -23,12 +23,10 @@ export class RegisterPage {
 
     this.authService.register(this.email, this.password).subscribe(
       (response) => {
-        // Handle successful registration
         console.log('User registered successfully:', response);
-        this.router.navigate(['/home']); // Redirect after successful registration
+        this.router.navigate(['/login']); 
       },
       (error) => {
-        // Handle registration errors
         alert(error.error.error.message);
       }
     );

@@ -6,7 +6,6 @@
     <ion-title>{{ circuit?.fields?.name?.stringValue || 'Circuit Details' }}</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
   <ion-spinner *ngIf="loading"></ion-spinner>
   <div *ngIf="!loading && circuit">

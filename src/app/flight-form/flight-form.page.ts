@@ -18,7 +18,8 @@ export class FlightFormPage implements OnInit {
     private fb: FormBuilder,
     private flightService: FlightService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    
   ) {
     this.flightForm = this.fb.group({
       flightNumber: ['', Validators.required],

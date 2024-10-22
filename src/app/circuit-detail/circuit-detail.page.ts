@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../data.service';
-
 @Component({
   selector: 'app-circuit-detail',
   templateUrl: './circuit-detail.page.html',
@@ -10,12 +9,10 @@ import { DataService } from '../data.service';
 export class CircuitDetailPage implements OnInit {
   circuit: any;
   loading: boolean = true;
-
   constructor(
     private route: ActivatedRoute,
     private dataService: DataService
   ) {}
-
   ngOnInit() {
     const circuitId = this.route.snapshot.paramMap.get('id');
     console.log(circuitId);
@@ -27,7 +24,6 @@ export class CircuitDetailPage implements OnInit {
       this.loading = false; 
     }
   }
-
   loadCircuitDetails(id: string) {
     this.dataService.getCircuitById(id).subscribe(
       (data: any) => {
